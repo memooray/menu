@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXT LEVEL ++ Full Digital Menu</title>
+    <!-- خطوط عصرية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* إعدادات الشاشة الأساسية */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Cairo', sans-serif;
+            color: #FFFFFF;
+            background-color: #050505;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* الهيدر (الشعار والعنوان) */
+        header {
+            width: 100%;
+            height: 13vh;
+            background: linear-gradient(180deg, rgba(5,5,5,0.95) 0%, rgba(20,20,20,0.9) 100%);
+            border-bottom: 2px solid #E51937;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(229, 25, 55, 0.2);
+        }
+
+        header img {
+            height: 5vh;
+            margin-bottom: 0.5vh;
+        }
+
+        header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3vh;
+            font-weight: 900;
+            color: #FFFFFF;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #E51937;
+        }
+        header h1 span { color: #E51937; }
+
+        /* حاوية الشاشات (السلايدر) */
+        .slider-container {
+            flex-grow: 1;
+            position: relative;
+            background-color: #000;
+        }
+
+        /* إعدادات السلايد الواحد */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* طبقة شفافة غامقة فوق الصورة الخلفية لبروز النص */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        /* شبكة عرض الأقسام */
+        .menu-layout {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            padding: 30px 50px;
+            box-sizing: border-box;
+            gap: 50px;
+        }
+
+        .menu-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* عنوان القسم */
+        .section-title {
+            font-size: 2.2em;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            border-right: 5px solid #E51937;
+            padding-right: 15px;
+            text-shadow: 0 0 15px rgba(229, 25, 55, 0.4);
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .section-title span.en {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.6em;
+            color: #AAAAAA;
+            letter-spacing: 1px;
+        }
+
+        /* قائمة الأصناف */
+        .items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* تصميم الصنف الواحد */
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.4em;
+            font-weight: 700;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+            padding-bottom: 5px;
+        }
+
+        .item-name-group {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+        .item-name-group .ar { color: #FFF; font-size: 1.1em; }
+        .item-name-group .en { font-family: 'Oswald', sans-serif; font-size: 0.7em; color: #888; }
+
+        .item-dots {
+            flex-grow: 1;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+            margin: 0 15px;
+            position: relative;
+            top: -5px;
+        }
+
+        .item-price {
+            color: #FFF;
+            font-weight: 900;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .item-price small {
+            font-size: 0.6em;
+            color: #E51937;
+            margin-right: 5px;
+        }
+
+        /* نقاط التحكم */
+        .slide-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        .dot.active {
+            background-color: #E51937;
+            box-shadow: 0 0 10px #E51937;
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="next level logo.ico" alt="NEXT LEVEL logo">
+        <h1>NEXT LEVEL <span>++</span></h1>
+    </header>
+
+    <div class="slider-container">
+
+        <!-- الشاشة الأولى: المشروبات الحارة والفرابيه -->
+        <!-- صورة خلفية للقهوة -->
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1920&auto=format&fit=crop');">
+            <div class="overlay"></div>
+            <div class="menu-layout">
+                <!-- العمود الأول -->
+                <div class="menu-column">
+                    <h2 class="section-title">المشروبات الحارة <span class="en">HOT DRINKS</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">إسبريسو</span><span class="en">ESPRESSO</span></div><span class="item-dots"></span><span class="item-price">2,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">دبل إسبريسو</span><span class="en">DOUBLE ESPRESSO</span></div><span class="item-dots"></span><span class="item-price">2,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">أمريكانو</span><span class="en">AMERICANO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كابتشينو</span><span class="en">CAPPUCCINO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">لاتيه</span><span class="en">LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">سبانش لاتيه</span><span class="en">SPANISH LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 &nbsp;<small>L</small>5,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">هوت شوكلت</span><span class="en">HOT CHOCOLATE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">نسكافيه</span><span class="en">NESCAFE</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">قهوة تركية</span><span class="en">TURKISH COFFEE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>2,000 &nbsp;<small>L</small>3,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">شاي عراقي</span><span class="en">IRAQI TEA</span></div><span class="item-dots"></span><span class="item-price">1,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">شاي بالليمون</span><span class="en">LEMON TEA</span></div><span class="item-dots"></span><span class="item-price">1,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">شاي كرك</span><span class="en">KARAK TEA</span></div><span class="item-dots"></span><span class="item-price">2,000</span></div>
+                    </div>
+                </div>
+                <!-- العمود الثاني -->
+                <div class="menu-column">
+                    <h2 class="section-title">القهوة المثلجة والفرابيه <span class="en">ICED COFFEE & FRAPPE</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">ايس امريكانو</span><span class="en">ICE AMERICANO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس لاتيه</span><span class="en">ICE LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 &nbsp;<small>L</small>5,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس كراميل لاتيه</span><span class="en">ICE LATTE CARAMEL</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,500 &nbsp;<small>L</small>5,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس بندق لاتيه</span><span class="en">HAZELNUT ICE LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,500 &nbsp;<small>L</small>5,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس موكا</span><span class="en">ICE MOCHA</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس سبانش لاتيه</span><span class="en">SPANISH ICE LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 &nbsp;<small>L</small>5,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فرابيه كراميل</span><span class="en">CARAMEL FRAPPE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فرابيه جوكليت</span><span class="en">CHOCOLATE FRAPPE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشاشة الثانية: الموهيتو والميلك شيك -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1920&auto=format&fit=crop');">
+            <div class="overlay"></div>
+            <div class="menu-layout">
+                <div class="menu-column">
+                    <h2 class="section-title">الموهيتو <span class="en">MOJITO</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">كلاسيك</span><span class="en">CLASSIC</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فراولة</span><span class="en">STRAWBERRY</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">بلو كروسو</span><span class="en">BLUE CURACAO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">مانجو</span><span class="en">MANGO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">باشن فروت</span><span class="en">PASSION FRUIT</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                    </div>
+                </div>
+                <div class="menu-column">
+                    <h2 class="section-title">الميلك شيك <span class="en">MILKSHAKE</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">شوكلاتة</span><span class="en">CHOCOLATE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كندر</span><span class="en">KINDER</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فراولة</span><span class="en">STRAWBERRY</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">اوريو</span><span class="en">OREO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">لوتس</span><span class="en">LOTUS</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">بيستاشيو</span><span class="en">PISTACHIO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,500 &nbsp;<small>L</small>6,500</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشاشة الثالثة: مكسات الطاقة، كريب، وافل -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=1920&auto=format&fit=crop');">
+            <div class="overlay"></div>
+            <div class="menu-layout" style="gap: 20px;">
+                <div class="menu-column">
+                    <h2 class="section-title">مكسات الطاقة <span class="en">ENERGY MIX</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">فراولة</span><span class="en">STRAWBERRY</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">بلو كروسو</span><span class="en">BLUE CURACAO</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">مانجو</span><span class="en">MANGO</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">باشن فروت</span><span class="en">PASSION FRUIT</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">مكسيكي</span><span class="en">MEXICAN</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">ريد بول</span><span class="en">RED BULL</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
+                    </div>
+                </div>
+                <div class="menu-column">
+                    <h2 class="section-title">كريب <span class="en">CREPE</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">كلاسيك</span><span class="en">CLASSIC</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فواكة</span><span class="en">FRUIT</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كندر</span><span class="en">KINDER</span></div><span class="item-dots"></span><span class="item-price">4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">لوتس</span><span class="en">LOTUS</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">اوريو</span><span class="en">OREO</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                    </div>
+                </div>
+                <div class="menu-column">
+                    <h2 class="section-title">وافل <span class="en">WAFFLE</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">شوكلاتة</span><span class="en">CHOCOLATE</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فواكة</span><span class="en">FRUIT</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كندر</span><span class="en">KINDER</span></div><span class="item-dots"></span><span class="item-price">4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">لوتس</span><span class="en">LOTUS</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">اوريو</span><span class="en">OREO</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشاشة الرابعة: الأراكيل -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518559092445-667dc9e7f8e8?q=80&w=1920&auto=format&fit=crop');">
+            <div class="overlay"></div>
+            <div class="menu-layout">
+                <div class="menu-column">
+                    <h2 class="section-title">الأراكيل - كلاسيك <span class="en">HOOKA CLASSIC</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">علكة ونعناع</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">ليمون ونعناع</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">تفاحتين</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">علكة وقرفة</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
+                        <br>
+                        <div class="item"><div class="item-name-group"><span class="ar" style="color:#E51937;">تبديل فنجان</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
+                    </div>
+                </div>
+                <div class="menu-column">
+                    <h2 class="section-title">الأراكيل - مكس <span class="en">HOOKA MIX</span></h2>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">إنكليزي</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">إيلي</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">لفل أب</span></div><span class="item-dots"></span><span class="item-price">7,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">ماريو</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كريتوس</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- نقاط التحكم -->
+        <div class="slide-controls">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <!-- كود الحركة (الجافاسكربت) -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const slideInterval = 12000; // وقت التبديل: 12 ثانية لتتم قراءة المنيو براحة
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                dots[i].classList.remove('active');
+            });
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function showNextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        let slideTimer = setInterval(showNextSlide, slideInterval);
+    </script>
+
+</body>
+</html>
