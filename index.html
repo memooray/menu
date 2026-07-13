@@ -25,7 +25,7 @@
         /* الهيدر (الشعار والعنوان) */
         header {
             width: 100%;
-            height: 13vh;
+            height: 12vh;
             background: linear-gradient(180deg, rgba(5,5,5,0.95) 0%, rgba(20,20,20,0.9) 100%);
             border-bottom: 2px solid #E51937;
             display: flex;
@@ -38,13 +38,13 @@
         }
 
         header img {
-            height: 5vh;
+            height: 4.5vh;
             margin-bottom: 0.5vh;
         }
 
         header h1 {
             font-family: 'Oswald', sans-serif;
-            font-size: 3vh;
+            font-size: 2.8vh;
             font-weight: 900;
             color: #FFFFFF;
             margin: 0;
@@ -69,7 +69,7 @@
             height: 100%;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1.2s ease-in-out;
+            transition: opacity 1s ease-in-out;
             background-size: cover;
             background-position: center;
         }
@@ -85,97 +85,118 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.6) 100%);
+            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.88) 50%, rgba(0,0,0,0.75) 100%);
             z-index: 1;
         }
 
-        /* شبكة عرض الأقسام */
+        /* شبكة عرض الأقسام (4 أقسام بالشاشة) */
         .menu-layout {
             position: relative;
             z-index: 2;
             width: 100%;
             height: 100%;
-            display: flex;
-            padding: 30px 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            grid-template-rows: 1fr 1fr;    
+            padding: 20px 40px;
             box-sizing: border-box;
-            gap: 50px;
-        }
-
-        .menu-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            gap: 20px 60px; 
         }
 
         /* عنوان القسم */
         .section-title {
-            font-size: 2.2em;
+            font-size: 1.7em;
             color: #FFFFFF;
-            margin-bottom: 20px;
-            border-right: 5px solid #E51937;
-            padding-right: 15px;
+            margin-bottom: 2px;
+            margin-top: 0;
+            border-right: 4px solid #E51937;
+            padding-right: 12px;
             text-shadow: 0 0 15px rgba(229, 25, 55, 0.4);
             display: flex;
             flex-direction: column;
-            line-height: 1.2;
+            line-height: 1.1;
         }
         .section-title span.en {
             font-family: 'Oswald', sans-serif;
-            font-size: 0.6em;
+            font-size: 0.55em;
             color: #AAAAAA;
             letter-spacing: 1px;
+        }
+
+        /* العبارة التسويقية أسفل عنوان القسم */
+        .section-tagline {
+            font-size: 0.85em;
+            color: #E51937;
+            margin-bottom: 12px;
+            font-weight: 700;
+            padding-right: 12px;
         }
 
         /* قائمة الأصناف */
         .items-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 12px; 
         }
 
         /* تصميم الصنف الواحد */
         .item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-size: 1.4em;
+            align-items: flex-start; 
             font-weight: 700;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
-            padding-bottom: 5px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
         }
 
         .item-name-group {
             display: flex;
             flex-direction: column;
-            line-height: 1.1;
+            line-height: 1.3;
+            flex-grow: 1;
         }
-        .item-name-group .ar { color: #FFF; font-size: 1.1em; }
-        .item-name-group .en { font-family: 'Oswald', sans-serif; font-size: 0.7em; color: #888; }
+        .item-name-group .ar { color: #FFF; font-size: 1.2em; font-weight: 700; }
+        .item-name-group .en { font-family: 'Oswald', sans-serif; font-size: 0.75em; color: #999; margin-right: 5px; }
+        
+        /* المكونات والعبارات التسويقية الفاتحة والواضحة للشاشات */
+        .item-name-group .desc { 
+            font-size: 0.85em;          
+            color: #EBF0F5;            
+            font-weight: 500; 
+            margin-top: 4px;
+            max-width: 85%;            
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+        }
 
         .item-dots {
             flex-grow: 1;
-            border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
-            margin: 0 15px;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
+            margin: 0 10px;
             position: relative;
-            top: -5px;
+            top: 12px; 
         }
 
         .item-price {
             color: #FFF;
             font-weight: 900;
+            font-size: 1.3em;
             text-align: left;
             white-space: nowrap;
+            padding-top: 2px;
         }
         .item-price small {
-            font-size: 0.6em;
+            font-size: 0.65em;
             color: #E51937;
-            margin-right: 5px;
+            margin-right: 3px;
+            margin-left: 5px;
+            font-weight: 900;
         }
 
         /* نقاط التحكم */
         .slide-controls {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -183,8 +204,8 @@
             z-index: 100;
         }
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background-color: rgba(255,255,255,0.2);
             transition: all 0.3s ease;
@@ -205,143 +226,239 @@
 
     <div class="slider-container">
 
-        <!-- الشاشة الأولى: المشروبات الحارة والفرابيه -->
-        <!-- صورة خلفية للقهوة -->
+        <!-- ============================================== -->
+        <!-- الشاشة الأولى: المشروبات الحارة -->
+        <!-- ============================================== -->
         <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1920&auto=format&fit=crop');">
             <div class="overlay"></div>
             <div class="menu-layout">
-                <!-- العمود الأول -->
-                <div class="menu-column">
-                    <h2 class="section-title">المشروبات الحارة <span class="en">HOT DRINKS</span></h2>
+                <div>
+                    <h2 class="section-title">كلاسيكيات حارة <span class="en">HOT CLASSICS</span></h2>
+                    <div class="section-tagline">اصنع بداية يومك بالطاقة المطلقة</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">إسبريسو</span><span class="en">ESPRESSO</span></div><span class="item-dots"></span><span class="item-price">2,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">دبل إسبريسو</span><span class="en">DOUBLE ESPRESSO</span></div><span class="item-dots"></span><span class="item-price">2,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">أمريكانو</span><span class="en">AMERICANO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">كابتشينو</span><span class="en">CAPPUCCINO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">لاتيه</span><span class="en">LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">سبانش لاتيه</span><span class="en">SPANISH LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 &nbsp;<small>L</small>5,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">هوت شوكلت</span><span class="en">HOT CHOCOLATE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">نسكافيه</span><span class="en">NESCAFE</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">قهوة تركية</span><span class="en">TURKISH COFFEE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>2,000 &nbsp;<small>L</small>3,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">شاي عراقي</span><span class="en">IRAQI TEA</span></div><span class="item-dots"></span><span class="item-price">1,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">شاي بالليمون</span><span class="en">LEMON TEA</span></div><span class="item-dots"></span><span class="item-price">1,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">شاي كرك</span><span class="en">KARAK TEA</span></div><span class="item-dots"></span><span class="item-price">2,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">إسبريسو <span class="en">ESPRESSO</span></span><span class="desc">خلاصة بن ريجال بريميوم النقي المستخلص بعناية فائقة.</span></div><span class="item-dots"></span><span class="item-price">2,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">دبل إسبريسو <span class="en">DOUBLE ESPRESSO</span></span><span class="desc">جرعة مضاعفة من التركيز الصافي لأصحاب المزاج العالي.</span></div><span class="item-dots"></span><span class="item-price">2,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">أمريكانو <span class="en">AMERICANO</span></span><span class="desc">إسبريسو غني مخفوف بالماء الساخن لتوازن مثالي ونقي.</span></div><span class="item-dots"></span><span class="item-price">3,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">نسكافيه <span class="en">NESCAFE</span></span><span class="desc">قهوة سريعة الذوبان غنية بالرغوة الدافئة والمذاق المألوف.</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
                     </div>
                 </div>
-                <!-- العمود الثاني -->
-                <div class="menu-column">
-                    <h2 class="section-title">القهوة المثلجة والفرابيه <span class="en">ICED COFFEE & FRAPPE</span></h2>
+                <div>
+                    <h2 class="section-title">مكس الحليب <span class="en">MILK BASED</span></h2>
+                    <div class="section-tagline">تناغم مخملي بين القهوة والحليب الساخن</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">ايس امريكانو</span><span class="en">ICE AMERICANO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس لاتيه</span><span class="en">ICE LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 &nbsp;<small>L</small>5,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس كراميل لاتيه</span><span class="en">ICE LATTE CARAMEL</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,500 &nbsp;<small>L</small>5,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس بندق لاتيه</span><span class="en">HAZELNUT ICE LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,500 &nbsp;<small>L</small>5,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس موكا</span><span class="en">ICE MOCHA</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس سبانش لاتيه</span><span class="en">SPANISH ICE LATTE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 &nbsp;<small>L</small>5,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">فرابيه كراميل</span><span class="en">CARAMEL FRAPPE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">فرابيه جوكليت</span><span class="en">CHOCOLATE FRAPPE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كابتشينو <span class="en">CAPPUCCINO</span></span><span class="desc">إسبريسو، حليب مبخر، وطبقة سميكة من الرغوة الفاخرة.</span></div><span class="item-dots"></span><span class="item-price">3,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">لاتيه <span class="en">LATTE</span></span><span class="desc">إسبريسو كلاسيكي يمتزج بنعومة مع حليب مطهو على البخار.</span></div><span class="item-dots"></span><span class="item-price">3,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">سبانش لاتيه <span class="en">SPANISH LATTE</span></span><span class="desc">إسبريسو مع حليب مكثف محلى لمزيج غني بالقوام والحلاوة.</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">الشرقي والتقليدي <span class="en">TRADITIONAL</span></h2>
+                    <div class="section-tagline">أصالة الطعم على أصولها الفنية وطقوسها الخاصة</div>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">قهوة تركية <span class="en">TURKISH COFFEE</span></span><span class="desc">بن تركي فاخر مطبوخ ببطء للحصول على وجه رغوي مثالي.</span></div><span class="item-dots"></span><span class="item-price">2,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">شاي عراقي <span class="en">IRAQI TEA</span></span><span class="desc">شاي سيلاني أصيل، مخدر ببطء لتقديم الطعم السنكين الفاخر.</span></div><span class="item-dots"></span><span class="item-price">1,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">شاي بالليمون <span class="en">LEMON TEA</span></span><span class="desc">شاي أحمر دافئ مضاف إليه شرائح الليمون الطبيعي المنعش.</span></div><span class="item-dots"></span><span class="item-price">1,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">شاي كرك <span class="en">KARAK TEA</span></span><span class="desc">شاي مطبوخ بالحليب المكثف ومكس بهارات الكرك الدافئة.</span></div><span class="item-dots"></span><span class="item-price">2,000</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">إضافات خاصة <span class="en">SPECIALS</span></h2>
+                    <div class="section-tagline">عش اللحظة مع دفء الشوكولاتة البلجيكية</div>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">هوت شوكلت <span class="en">HOT CHOCOLATE</span></span><span class="desc">بودرة الكاكاو الغنية الذائبة مع حليب ساخن وصوص شوكولاتة.</span></div><span class="item-dots"></span><span class="item-price">3,500</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- الشاشة الثانية: الموهيتو والميلك شيك -->
+        <!-- ============================================== -->
+        <!-- الشاشة الثانية: القهوة المثلجة والفرابيه (معدلة بالأحجام) -->
+        <!-- ============================================== -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=1920&auto=format&fit=crop');">
+            <div class="overlay"></div>
+            <div class="menu-layout">
+                <div>
+                    <h2 class="section-title">آيس كلاسيك <span class="en">ICE CLASSIC</span></h2>
+                    <div class="section-tagline">جرعة الانتعاش الباردة التي تبحث عنها لكسر الحر</div>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">ايس امريكانو <span class="en">ICE AMERICANO</span></span><span class="desc">إسبريسو مركز ينسكب فوق قطع الثلج والماء البارد للنقاء المطلق.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 <small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس لاتيه <span class="en">ICE LATTE</span></span><span class="desc">إسبريسو بارد مع الحليب المثلج الغني لجرعة نشاط مثالية.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 <small>L</small>5,000</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">آيس بالنكهات <span class="en">FLAVORED ICE</span></h2>
+                    <div class="section-tagline">نكهات ساحرة تذوب مع الجليد لتعطيك طعماً فريداً</div>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس كراميل لاتيه <span class="en">ICE LATTE CARAMEL</span></span><span class="desc">مزيج اللاتيه المثلج مغطى بصوص وشراب الكراميل الذهبي اللذيذ.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,500 <small>L</small>5,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس بندق لاتيه <span class="en">HAZELNUT ICE LATTE</span></span><span class="desc">لاتيه مثلج فاخر مع لمسة غنية من سيرب البندق المحمص المميز.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,500 <small>L</small>5,500</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">آيس مميز <span class="en">SIGNATURE ICE</span></h2>
+                    <div class="section-tagline">خلطات حصرية ومبتكرة ترفع مستوى مزاجك فوراً</div>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس موكا <span class="en">ICE MOCHA</span></span><span class="desc">اتحاد الإسبريسو القوي وصوص الشوكولاتة الغامقة مع الحليب والثلج.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 <small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">آيس سبانش لاتيه <span class="en">SPANISH ICE LATTE</span></span><span class="desc">حليب مكثف محلى، إسبريسو بارد، وقطع ثلج تعطيك شعوراً لا يُنسى.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 <small>L</small>5,000</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">الفرابيه <span class="en">FRAPPE</span></h2>
+                    <div class="section-tagline">قوام كريمي كثيف مثلج ومخفوق بإتقان احترافي</div>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">فرابيه كراميل <span class="en">CARAMEL FRAPPE</span></span><span class="desc">قهوة مخفوقة بالثلج والكراميل الفاخر، مزينة بالكريمة الغنية.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 <small>L</small>6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فرابيه جوكليت <span class="en">CHOCOLATE FRAPPE</span></span><span class="desc">مكس بارد مخفوق مع صوص الشوكولاتة البلجيكية الغنية لعشاق الشوكولاتة.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 <small>L</small>6,000</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- الشاشة الثالثة: الموهيتو، مكس الطاقة، والميلك شيك -->
+        <!-- ============================================== -->
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1920&auto=format&fit=crop');">
             <div class="overlay"></div>
             <div class="menu-layout">
-                <div class="menu-column">
+                <div>
                     <h2 class="section-title">الموهيتو <span class="en">MOJITO</span></h2>
+                    <div class="section-tagline">انفجار الانتعاش الحقيقي والفاكهة الطبيعية الفريش</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">كلاسيك</span><span class="en">CLASSIC</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">فراولة</span><span class="en">STRAWBERRY</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">بلو كروسو</span><span class="en">BLUE CURACAO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">مانجو</span><span class="en">MANGO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">باشن فروت</span><span class="en">PASSION FRUIT</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 &nbsp;<small>L</small>4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كلاسيك / فراولة <span class="en">MOJITO</span></span><span class="desc">ليمون ونعناع فريش أو بيوريه فراولة طبيعي مع صودا فوارة وثلج.</span></div><span class="item-dots"></span><span class="item-price">3,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">بلو كروسو / مانجو <span class="en">MOJITO</span></span><span class="desc">اللون الأزرق بنكهة البرتقال الاستوائي أو حلاوة المانجو الكثيفة مع الصودا.</span></div><span class="item-dots"></span><span class="item-price">3,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">باشن فروت <span class="en">PASSION FRUIT</span></span><span class="desc">فاكهة الآلام الفاخرة بلمسة حامضة وحلوة تنبض بالحياة مع الثلج.</span></div><span class="item-dots"></span><span class="item-price">3,500</span></div>
                     </div>
                 </div>
-                <div class="menu-column">
-                    <h2 class="section-title">الميلك شيك <span class="en">MILKSHAKE</span></h2>
-                    <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">شوكلاتة</span><span class="en">CHOCOLATE</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">كندر</span><span class="en">KINDER</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">فراولة</span><span class="en">STRAWBERRY</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">اوريو</span><span class="en">OREO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">لوتس</span><span class="en">LOTUS</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 &nbsp;<small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">بيستاشيو</span><span class="en">PISTACHIO</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,500 &nbsp;<small>L</small>6,500</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- الشاشة الثالثة: مكسات الطاقة، كريب، وافل -->
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=1920&auto=format&fit=crop');">
-            <div class="overlay"></div>
-            <div class="menu-layout" style="gap: 20px;">
-                <div class="menu-column">
+                <div>
                     <h2 class="section-title">مكسات الطاقة <span class="en">ENERGY MIX</span></h2>
+                    <div class="section-tagline">شحن طاقة لفل أب يتحدى التعب ويرفع الأدرينالين</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">فراولة</span><span class="en">STRAWBERRY</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">بلو كروسو</span><span class="en">BLUE CURACAO</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">مانجو</span><span class="en">MANGO</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">باشن فروت</span><span class="en">PASSION FRUIT</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">مكسيكي</span><span class="en">MEXICAN</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">ريد بول</span><span class="en">RED BULL</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فراولة / بلو / مانجو / باشن</span><span class="desc">مشروب طاقة مدعم ومكثف بنكهاتنا الخاصة وسيرب الفاكهة المركز.</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">مكسيكي <span class="en">MEXICAN</span></span><span class="desc">مكس غامض وحار قليلاً يعطيك طاقة قصوى وتجربة فريدة جداً.</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">ليفل انفيرنو <span class="en">LEVEL INFERNO</span></span><span class="desc">علبة ليفل انفيرنو العالمية الأصلية باردة ومثالية لإعطائك جوانح.</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
                     </div>
                 </div>
-                <div class="menu-column">
-                    <h2 class="section-title">كريب <span class="en">CREPE</span></h2>
+                <div>
+                    <h2 class="section-title">ميلك شيك <span class="en">MILKSHAKE</span></h2>
+                    <div class="section-tagline">قوام كريمي غني وثقيل يذوب في الفم بلذة</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">كلاسيك</span><span class="en">CLASSIC</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">فواكة</span><span class="en">FRUIT</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">كندر</span><span class="en">KINDER</span></div><span class="item-dots"></span><span class="item-price">4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">لوتس</span><span class="en">LOTUS</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">اوريو</span><span class="en">OREO</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">شوكلاتة / فراولة <span class="en">SHAKE</span></span><span class="desc">آيس كريم غني، حليب كامل الدسم، مع صوص الشوكولاتة أو بيوريه الفراولة.</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">اوريو <span class="en">OREO SHAKE</span></span><span class="desc">قطع بسكويت أوريو المقرمشة المطحونة، مخفوقة مع الآيس كريم والحليب.</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
                     </div>
                 </div>
-                <div class="menu-column">
-                    <h2 class="section-title">وافل <span class="en">WAFFLE</span></h2>
+                <div>
+                    <h2 class="section-title">ميلك شيك مميز <span class="en">SPECIAL SHAKE</span></h2>
+                    <div class="section-tagline">فخامة الطعم والمكونات الممتازة لعشاق التميز</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">شوكلاتة</span><span class="en">CHOCOLATE</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">فواكة</span><span class="en">FRUIT</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">كندر</span><span class="en">KINDER</span></div><span class="item-dots"></span><span class="item-price">4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">لوتس</span><span class="en">LOTUS</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">اوريو</span><span class="en">OREO</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كندر / لوتس <span class="en">PREMIUM SHAKE</span></span><span class="desc">شوكولاتة كندر بوينو الذائبة أو زبدة اللوتس الأصلية مع الآيس كريم المخملي.</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">بيستاشيو <span class="en">PISTACHIO SHAKE</span></span><span class="desc">خلطة الفستق الحلبي الفاخرة مع حليب وآيس كريم بريميوم غني ومكثف.</span></div><span class="item-dots"></span><span class="item-price">5,500</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- الشاشة الرابعة: الأراكيل -->
+        <!-- ============================================== -->
+        <!-- الشاشة الرابعة: الحلويات والأراكيل -->
+        <!-- ============================================== -->
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518559092445-667dc9e7f8e8?q=80&w=1920&auto=format&fit=crop');">
             <div class="overlay"></div>
             <div class="menu-layout">
-                <div class="menu-column">
-                    <h2 class="section-title">الأراكيل - كلاسيك <span class="en">HOOKA CLASSIC</span></h2>
+                <div>
+                    <h2 class="section-title">كريب <span class="en">CREPE</span></h2>
+                    <div class="section-tagline">عجينة فرنسية هشة تذوب مع السعادة والدفء</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">علكة ونعناع</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">ليمون ونعناع</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">تفاحتين</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">علكة وقرفة</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
-                        <br>
-                        <div class="item"><div class="item-name-group"><span class="ar" style="color:#E51937;">تبديل فنجان</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كلاسيك / لوتس / اوريو</span><span class="desc">مغطاة بطبقات سخية من الشوكولاتة الفاخرة، زبدة اللوتس أو الأوريو المطحون.</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كندر <span class="en">KINDER</span></span><span class="desc">غرقانة بصوص الكندر البلجيكي الغني وقطع شوكولاتة كندر الفاخرة المميّزة.</span></div><span class="item-dots"></span><span class="item-price">4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فواكة <span class="en">FRUIT</span></span><span class="desc">قطع الفواكه الموسمية الطازجة (موز، فراولة) مغطاة بصوص الشوكولاتة الغني.</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
                     </div>
                 </div>
-                <div class="menu-column">
-                    <h2 class="section-title">الأراكيل - مكس <span class="en">HOOKA MIX</span></h2>
+                <div>
+                    <h2 class="section-title">وافل <span class="en">WAFFLE</span></h2>
+                    <div class="section-tagline">مخبوز ومقرمش من الخارج وطري من الداخل</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">إنكليزي</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">إيلي</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">لفل أب</span></div><span class="item-dots"></span><span class="item-price">7,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">ماريو</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">كريتوس</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">شوكلاتة / لوتس / اوريو</span><span class="desc">مخبوز طازجاً ومزين بصوص النوتيلا الغني أو مكس زبدة وبسكويت اللوتس.</span></div><span class="item-dots"></span><span class="item-price">4,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">كندر <span class="en">KINDER</span></span><span class="desc">مربعات الوافل الساخنة المحشوة والمغطاة بصوص الكندر اللذيذ والذائب.</span></div><span class="item-dots"></span><span class="item-price">4,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">فواكة <span class="en">FRUIT</span></span><span class="desc">لوحة فنية من الفواكه الفريش المقطعة وخطوط الشوكولاتة البلجيكية الغنية.</span></div><span class="item-dots"></span><span class="item-price">5,000</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">الأراكيل - كلاسيك <span class="en">HOOKA CLASSIC</span></h2>
+                    <div class="section-tagline">سحبة نبيذة ونكهات عالمية أصلية تضبط المزاج</div>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">علكة ونعناع / ليمون ونعناع</span><span class="desc">معسل فاخر مغسول ومعد بدقة لتجربة تدخين ناعمة ونقية ونفَس طويل.</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">تفاحتين / علكة وقرفة</span><span class="desc">النكهة التقليدية الاصيلة والقوية لأصحاب الكيف والمزاج العالي والثقيل.</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar" style="color:#E51937;">تبديل فنجان</span><span class="desc">تجديد الفنجان بنكهة طازجة ونار هادئة ومثالية لاستكمال قعدتك.</span></div><span class="item-dots"></span><span class="item-price">3,000</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-title">الأراكيل - مكس <span class="en">HOOKA MIX</span></h2>
+                    <div class="section-tagline">خلطات نكست ليفل السرية والحصرية المبتكرة</div>
+                    <div class="items-list">
+                        <div class="item"><div class="item-name-group"><span class="ar">إنكليزي / إيلي / ماريو / كريتوس</span><span class="desc">توليفة حصرية من الفواكه والمكسات الباردة لانتعاش ونكهة تدوم طويلاً.</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">لفل أب <span class="en" style="color:#E51937;"></span></span><span class="desc">خلطتنا الأقوى والأكثر طلباً! مكس يرفع مزاجك وعقلك لأعلى مستوى ممكن.</span></div><span class="item-dots"></span><span class="item-price">7,500</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- نقاط التحكم -->
+        <!-- ============================================== -->
+        <!-- الشاشة الخامسة: العروض الخاصة (بدون صوره خلفية نهائياً) -->
+        <!-- ============================================== -->
+        <div class="slide" style="background-color: #050505;">
+            <div class="menu-layout">
+                <!-- عرض الكريب -->
+                <div>
+                    <h2 class="section-title">عروض الكريب <span class="en">CREPE SPECIAL</span></h2>
+                    <div class="section-tagline">مكس الحلا والقرمشة المثالي</div>
+                    <div class="items-list">
+                        <div class="item">
+                            <div class="item-name-group">
+                                <span class="ar">باكيج كريب لفل أب</span>
+                                <span class="desc">كريب طازج وساخن (كلاسيك أو لوتس أو أوريو) + مشروب غازي بارد منعش + شامية مقرمشة.</span>
+                            </div>
+                            <span class="item-dots"></span>
+                            <span class="item-price" style="text-shadow: 0 0 10px #E51937; color: #FFF;">5,000 د.ع</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- عرض الكيك -->
+                <div>
+                    <h2 class="section-title">عروض الكيك <span class="en">CAKE SPECIAL</span></h2>
+                    <div class="section-tagline">روقان وهدوء مع كل قطعة</div>
+                    <div class="items-list">
+                        <div class="item">
+                            <div class="item-name-group">
+                                <span class="ar">باكيج كيك المزاج</span>
+                                <span class="desc">قطعة كيك فاخرة غنية بالنكهة (لوتس أو أوريو أو بيستاشيو) + مشروب غازي بارد + شامية دافئة.</span>
+                            </div>
+                            <span class="item-dots"></span>
+                            <span class="item-price" style="text-shadow: 0 0 10px #E51937; color: #FFF;">5,000 د.ع</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- عرض الموهيتو -->
+                <div>
+                    <h2 class="section-title">عروض الموهيتو <span class="en">MOJITO SPECIAL</span></h2>
+                    <div class="section-tagline">انفجار الانتعاش لكسر الروتين والتعب</div>
+                    <div class="items-list">
+                        <div class="item">
+                            <div class="item-name-group">
+                                <span class="ar">باكيج الانتعاش والسناك</span>
+                                <span class="desc">مشروب موهيتو فريش فوار وبأوراق النعناع (حجم ميديام M) + كيس جبس مقرمش + شامية.</span>
+                            </div>
+                            <span class="item-dots"></span>
+                            <span class="item-price" style="text-shadow: 0 0 10px #E51937; color: #FFF;">5,000 د.ع</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- بوكس تسويقي موحد يجمع العروض لدعم الهوية -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- نقاط التحكم المحدثة لـ 5 شاشات -->
         <div class="slide-controls">
             <div class="dot active"></div>
+            <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
@@ -353,7 +470,7 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
-        const slideInterval = 12000; // وقت التبديل: 12 ثانية لتتم قراءة المنيو براحة
+        const slideInterval = 12000; // وقت التبديل التلقائي: 12 ثانية لكل شاشة لقراءة المكونات بوضوح
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
