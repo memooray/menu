@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXT LEVEL ++ Full Digital Menu</title>
     <!-- خطوط عصرية -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         /* إعدادات الشاشة الأساسية */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -20,36 +24,38 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            user-select: none;
         }
 
         /* الهيدر (الشعار والعنوان) */
         header {
             width: 100%;
-            height: 12vh;
-            background: linear-gradient(180deg, rgba(5,5,5,0.95) 0%, rgba(20,20,20,0.9) 100%);
-            border-bottom: 2px solid #E51937;
+            height: 11vh;
+            background: linear-gradient(180deg, rgba(5,5,5,0.98) 0%, rgba(20,20,20,0.92) 100%);
+            border-bottom: 3px solid #E51937;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             position: relative;
-            box-shadow: 0 5px 20px rgba(229, 25, 55, 0.2);
+            box-shadow: 0 5px 25px rgba(229, 25, 55, 0.25);
         }
 
         header img {
-            height: 4.5vh;
-            margin-bottom: 0.5vh;
+            height: 4.2vh;
+            margin-bottom: 0.3vh;
+            object-fit: contain;
         }
 
         header h1 {
             font-family: 'Oswald', sans-serif;
-            font-size: 2.8vh;
+            font-size: 2.6vh;
             font-weight: 900;
             color: #FFFFFF;
             margin: 0;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px #E51937;
+            text-shadow: 0 0 12px rgba(229, 25, 55, 0.8);
         }
         header h1 span { color: #E51937; }
 
@@ -58,6 +64,7 @@
             flex-grow: 1;
             position: relative;
             background-color: #000;
+            overflow: hidden;
         }
 
         /* إعدادات السلايد الواحد */
@@ -69,13 +76,31 @@
             height: 100%;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
             background-size: cover;
             background-position: center;
         }
         .slide.active {
             opacity: 1;
             visibility: visible;
+        }
+
+        /* شاشة الصورة الإعلانية (إظهار الصورة بالكامل بدون اقتطاع) */
+        .slide.promo-image-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide.promo-image-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain; /* يضمن ظهور كامل تفاصيل الصورة على أي شاشة دون قص */
         }
 
         /* طبقة شفافة غامقة فوق الصورة الخلفية لبروز النص */
@@ -85,7 +110,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.88) 50%, rgba(0,0,0,0.75) 100%);
+            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.88) 50%, rgba(0,0,0,0.78) 100%);
             z-index: 1;
         }
 
@@ -98,14 +123,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr; 
             grid-template-rows: 1fr 1fr;    
-            padding: 20px 40px;
+            padding: 2.5vh 5vw;
             box-sizing: border-box;
-            gap: 20px 60px; 
+            gap: 2.5vh 5vw; 
         }
 
         /* عنوان القسم */
         .section-title {
-            font-size: 1.7em;
+            font-size: 1.6em;
             color: #FFFFFF;
             margin-bottom: 2px;
             margin-top: 0;
@@ -136,7 +161,7 @@
         .items-list {
             display: flex;
             flex-direction: column;
-            gap: 12px; 
+            gap: 10px; 
         }
 
         /* تصميم الصنف الواحد */
@@ -145,8 +170,8 @@
             justify-content: space-between;
             align-items: flex-start; 
             font-weight: 700;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+            padding-bottom: 6px;
         }
 
         .item-name-group {
@@ -154,43 +179,55 @@
             flex-direction: column;
             line-height: 1.3;
             flex-grow: 1;
+            max-width: 70%;
         }
-        .item-name-group .ar { color: #FFF; font-size: 1.2em; font-weight: 700; }
+        .item-name-group .ar { color: #FFF; font-size: 1.15em; font-weight: 700; }
         .item-name-group .en { font-family: 'Oswald', sans-serif; font-size: 0.75em; color: #999; margin-right: 5px; }
         
-        /* المكونات والعبارات التسويقية الفاتحة والواضحة للشاشات */
         .item-name-group .desc { 
-            font-size: 0.85em;          
-            color: #EBF0F5;            
+            font-size: 0.82em;          
+            color: #D1D5DB;             
             font-weight: 500; 
-            margin-top: 4px;
-            max-width: 85%;            
-            line-height: 1.4;
+            margin-top: 3px;
+            line-height: 1.35;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
         }
 
         .item-dots {
             flex-grow: 1;
-            border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
-            margin: 0 10px;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.25);
+            margin: 0 12px;
             position: relative;
-            top: 12px; 
+            top: 14px; 
         }
 
         .item-price {
             color: #FFF;
             font-weight: 900;
-            font-size: 1.3em;
+            font-size: 1.25em;
             text-align: left;
             white-space: nowrap;
             padding-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            direction: ltr;
         }
+
+        .price-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
         .item-price small {
-            font-size: 0.65em;
+            font-size: 0.6em;
             color: #E51937;
-            margin-right: 3px;
-            margin-left: 5px;
             font-weight: 900;
+            background: rgba(229, 25, 55, 0.15);
+            padding: 1px 5px;
+            border-radius: 4px;
+            border: 1px solid rgba(229, 25, 55, 0.3);
         }
 
         /* نقاط التحكم */
@@ -202,17 +239,25 @@
             display: flex;
             gap: 12px;
             z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 6px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
         }
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background-color: rgba(255,255,255,0.2);
+            background-color: rgba(255,255,255,0.3);
             transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .dot:hover {
+            background-color: rgba(255,255,255,0.7);
         }
         .dot.active {
             background-color: #E51937;
-            box-shadow: 0 0 10px #E51937;
+            box-shadow: 0 0 12px #E51937;
             transform: scale(1.3);
         }
     </style>
@@ -220,8 +265,8 @@
 <body>
 
     <header>
-        <img src="next level logo.ico" alt="NEXT LEVEL logo">
-        <h1>NEXT LEVEL <span></span></h1>
+        <img src="next level logo.ico" alt="NEXT LEVEL logo" onerror="this.style.display='none'">
+        <h1>NEXT LEVEL <span>++</span></h1>
     </header>
 
     <div class="slider-container">
@@ -272,7 +317,7 @@
         </div>
 
         <!-- ============================================== -->
-        <!-- الشاشة الثانية: القهوة المثلجة والفرابيه (معدلة بالأحجام) -->
+        <!-- الشاشة الثانية: القهوة المثلجة والفرابيه -->
         <!-- ============================================== -->
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=1920&auto=format&fit=crop');">
             <div class="overlay"></div>
@@ -281,32 +326,88 @@
                     <h2 class="section-title">آيس كلاسيك <span class="en">ICE CLASSIC</span></h2>
                     <div class="section-tagline">جرعة الانتعاش الباردة التي تبحث عنها لكسر الحر</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">ايس امريكانو <span class="en">ICE AMERICANO</span></span><span class="desc">إسبريسو مركز ينسكب فوق قطع الثلج والماء البارد للنقاء المطلق.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>3,500 <small>L</small>4,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس لاتيه <span class="en">ICE LATTE</span></span><span class="desc">إسبريسو بارد مع الحليب المثلج الغني لجرعة نشاط مثالية.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 <small>L</small>5,000</span></div>
+                        <div class="item">
+                            <div class="item-name-group"><span class="ar">ايس امريكانو <span class="en">ICE AMERICANO</span></span><span class="desc">إسبريسو مركز ينسكب فوق قطع الثلج والماء البارد للنقاء المطلق.</span></div>
+                            <span class="item-dots"></span>
+                            <span class="item-price">
+                                <span class="price-badge"><small>M</small>3,500</span>
+                                <span class="price-badge"><small>L</small>4,500</span>
+                            </span>
+                        </div>
+                        <div class="item">
+                            <div class="item-name-group"><span class="ar">آيس لاتيه <span class="en">ICE LATTE</span></span><span class="desc">إسبريسو بارد مع الحليب المثلج الغني لجرعة نشاط مثالية.</span></div>
+                            <span class="item-dots"></span>
+                            <span class="item-price">
+                                <span class="price-badge"><small>M</small>4,000</span>
+                                <span class="price-badge"><small>L</small>5,000</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div>
                     <h2 class="section-title">آيس بالنكهات <span class="en">FLAVORED ICE</span></h2>
                     <div class="section-tagline">نكهات ساحرة تذوب مع الجليد لتعطيك طعماً فريداً</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس كراميل لاتيه <span class="en">ICE LATTE CARAMEL</span></span><span class="desc">مزيج اللاتيه المثلج مغطى بصوص وشراب الكراميل الذهبي اللذيذ.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,500 <small>L</small>5,500</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس بندق لاتيه <span class="en">HAZELNUT ICE LATTE</span></span><span class="desc">لاتيه مثلج فاخر مع لمسة غنية من سيرب البندق المحمص المميز.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,500 <small>L</small>5,500</span></div>
+                        <div class="item">
+                            <div class="item-name-group"><span class="ar">آيس كراميل لاتيه <span class="en">ICE LATTE CARAMEL</span></span><span class="desc">مزيج اللاتيه المثلج مغطى بصوص وشراب الكراميل الذهبي اللذيذ.</span></div>
+                            <span class="item-dots"></span>
+                            <span class="item-price">
+                                <span class="price-badge"><small>M</small>4,500</span>
+                                <span class="price-badge"><small>L</small>5,500</span>
+                            </span>
+                        </div>
+                        <div class="item">
+                            <div class="item-name-group"><span class="ar">آيس بندق لاتيه <span class="en">HAZELNUT ICE LATTE</span></span><span class="desc">لاتيه مثلج فاخر مع لمسة غنية من سيرب البندق المحمص المميز.</span></div>
+                            <span class="item-dots"></span>
+                            <span class="item-price">
+                                <span class="price-badge"><small>M</small>4,500</span>
+                                <span class="price-badge"><small>L</small>5,500</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div>
                     <h2 class="section-title">آيس مميز <span class="en">SIGNATURE ICE</span></h2>
                     <div class="section-tagline">خلطات حصرية ومبتكرة ترفع مستوى مزاجك فوراً</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس موكا <span class="en">ICE MOCHA</span></span><span class="desc">اتحاد الإسبريسو القوي وصوص الشوكولاتة الغامقة مع الحليب والثلج.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 <small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">آيس سبانش لاتيه <span class="en">SPANISH ICE LATTE</span></span><span class="desc">حليب مكثف محلى، إسبريسو بارد، وقطع ثلج تعطيك شعوراً لا يُنسى.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>4,000 <small>L</small>5,000</span></div>
+                        <div class="item">
+                            <div class="item-name-group"><span class="ar">آيس موكا <span class="en">ICE MOCHA</span></span><span class="desc">اتحاد الإسبريسو القوي وصوص الشوكولاتة الغامقة مع الحليب والثلج.</span></div>
+                            <span class="item-dots"></span>
+                            <span class="item-price">
+                                <span class="price-badge"><small>M</small>5,000</span>
+                                <span class="price-badge"><small>L</small>6,000</span>
+                            </span>
+                        </div>
+                        <div class="item">
+                            <div class="item-name-group"><span class="ar">آيس سبانش لاتيه <span class="en">SPANISH ICE LATTE</span></span><span class="desc">حليب مكثف محلى، إسبريسو بارد، وقطع ثلج تعطيك شعوراً لا يُنسى.</span></div>
+                            <span class="item-dots"></span>
+                            <span class="item-price">
+                                <span class="price-badge"><small>M</small>4,000</span>
+                                <span class="price-badge"><small>L</small>5,000</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div>
                     <h2 class="section-title">الفرابيه <span class="en">FRAPPE</span></h2>
                     <div class="section-tagline">قوام كريمي كثيف مثلج ومخفوق بإتقان احترافي</div>
                     <div class="items-list">
-                        <div class="item"><div class="item-name-group"><span class="ar">فرابيه كراميل <span class="en">CARAMEL FRAPPE</span></span><span class="desc">قهوة مخفوقة بالثلج والكراميل الفاخر، مزينة بالكريمة الغنية.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 <small>L</small>6,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">فرابيه جوكليت <span class="en">CHOCOLATE FRAPPE</span></span><span class="desc">مكس بارد مخفوق مع صوص الشوكولاتة البلجيكية الغنية لعشاق الشوكولاتة.</span></div><span class="item-dots"></span><span class="item-price"><small>M</small>5,000 <small>L</small>6,000</span></div>
+                        <div class="item">
+                            <div class="item-name-group"><span class="ar">فرابيه كراميل <span class="en">CARAMEL FRAPPE</span></span><span class="desc">قهوة مخفوقة بالثلج والكراميل الفاخر، مزينة بالكريمة الغنية.</span></div>
+                            <span class="item-dots"></span>
+                            <span class="item-price">
+                                <span class="price-badge"><small>M</small>5,000</span>
+                                <span class="price-badge"><small>L</small>6,000</span>
+                            </span>
+                        </div>
+                        <div class="item">
+                            <div class="item-name-group"><span class="ar">فرابيه جوكليت <span class="en">CHOCOLATE FRAPPE</span></span><span class="desc">مكس بارد مخفوق مع صوص الشوكولاتة البلجيكية الغنية لعشاق الشوكولاتة.</span></div>
+                            <span class="item-dots"></span>
+                            <span class="item-price">
+                                <span class="price-badge"><small>M</small>5,000</span>
+                                <span class="price-badge"><small>L</small>6,000</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -380,7 +481,7 @@
                     </div>
                 </div>
                 <div>
-                    <h2 class="section-title">الأراكيل - كلاسيك <span class="en">HOOKA CLASSIC</span></h2>
+                    <h2 class="section-title">الأراكيل - كلاسيك <span class="en">HOOKAH CLASSIC</span></h2>
                     <div class="section-tagline">سحبة نبيذة ونكهات عالمية أصلية تضبط المزاج</div>
                     <div class="items-list">
                         <div class="item"><div class="item-name-group"><span class="ar">علكة ونعناع / ليمون ونعناع</span><span class="desc">معسل فاخر مغسول ومعد بدقة لتجربة تدخين ناعمة ونقية ونفَس طويل.</span></div><span class="item-dots"></span><span class="item-price">6,000</span></div>
@@ -389,22 +490,21 @@
                     </div>
                 </div>
                 <div>
-                    <h2 class="section-title">الأراكيل - مكس <span class="en">HOOKA MIX</span></h2>
+                    <h2 class="section-title">الأراكيل - مكس <span class="en">HOOKAH MIX</span></h2>
                     <div class="section-tagline">خلطات نكست ليفل السرية والحصرية المبتكرة</div>
                     <div class="items-list">
                         <div class="item"><div class="item-name-group"><span class="ar">إنكليزي / إيلي / ماريو / كريتوس</span><span class="desc">توليفة حصرية من الفواكه والمكسات الباردة لانتعاش ونكهة تدوم طويلاً.</span></div><span class="item-dots"></span><span class="item-price">7,000</span></div>
-                        <div class="item"><div class="item-name-group"><span class="ar">لفل أب <span class="en" style="color:#E51937;"></span></span><span class="desc">خلطتنا الأقوى والأكثر طلباً! مكس يرفع مزاجك وعقلك لأعلى مستوى ممكن.</span></div><span class="item-dots"></span><span class="item-price">7,500</span></div>
+                        <div class="item"><div class="item-name-group"><span class="ar">لفل أب <span class="en" style="color:#E51937;">LEVEL UP</span></span><span class="desc">خلطتنا الأقوى والأكثر طلباً! مكس يرفع مزاجك وعقلك لأعلى مستوى ممكن.</span></div><span class="item-dots"></span><span class="item-price">7,500</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- ============================================== -->
-        <!-- الشاشة الخامسة: العروض الخاصة (بدون صوره خلفية نهائياً) -->
+        <!-- الشاشة الخامسة: العروض الخاصة -->
         <!-- ============================================== -->
         <div class="slide" style="background-color: #050505;">
             <div class="menu-layout">
-                <!-- عرض الكريب -->
                 <div>
                     <h2 class="section-title">عروض الكريب <span class="en">CREPE SPECIAL</span></h2>
                     <div class="section-tagline">مكس الحلا والقرمشة المثالي</div>
@@ -419,7 +519,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- عرض الكيك -->
                 <div>
                     <h2 class="section-title">عروض الكيك <span class="en">CAKE SPECIAL</span></h2>
                     <div class="section-tagline">روقان وهدوء مع كل قطعة</div>
@@ -434,7 +533,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- عرض الموهيتو -->
                 <div>
                     <h2 class="section-title">عروض الموهيتو <span class="en">MOJITO SPECIAL</span></h2>
                     <div class="section-tagline">انفجار الانتعاش لكسر الروتين والتعب</div>
@@ -449,15 +547,20 @@
                         </div>
                     </div>
                 </div>
-                <!-- بوكس تسويقي موحد يجمع العروض لدعم الهوية -->
-                        </div>
-                    </div>
-                </div>
             </div>
+        </div>
 
-        <!-- نقاط التحكم المحدثة لـ 5 شاشات -->
+        <!-- ============================================== -->
+        <!-- الشاشة السادسة: الصورة الإعلانية (كاملة بدون قص) -->
+        <!-- ============================================== -->
+        <div class="slide promo-image-slide">
+            <img src="IMG_1921.PNG" alt="إعلان المقهى" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1920&auto=format&fit=crop';">
+        </div>
+
+        <!-- نقاط التحكم -->
         <div class="slide-controls">
             <div class="dot active"></div>
+            <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
@@ -465,28 +568,82 @@
         </div>
     </div>
 
-    <!-- كود الحركة (الجافاسكربت) -->
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
-        const slideInterval = 12000; // وقت التبديل التلقائي: 12 ثانية لكل شاشة لقراءة المكونات بوضوح
+        let slideTimer = null;
+
+        function getSlideDuration(index) {
+            if (index === slides.length - 1) {
+                return 3 * 60 * 1000; // الشاشة الإعلانية الأخيرة: 3 دقائق
+            }
+            return 12000; // شاشات المنيو: 12 ثانية
+        }
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.remove('active');
-                dots[i].classList.remove('active');
+                if (dots[i]) dots[i].classList.remove('active');
             });
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
+
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
         }
 
-        function showNextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            goToSlide(nextIndex);
         }
 
-        let slideTimer = setInterval(showNextSlide, slideInterval);
+        function prevSlide() {
+            let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            goToSlide(prevIndex);
+        }
+
+        function goToSlide(index) {
+            clearTimeout(slideTimer);
+            showSlide(index);
+            scheduleNextSlide();
+        }
+
+        function scheduleNextSlide() {
+            clearTimeout(slideTimer);
+            const duration = getSlideDuration(currentSlide);
+
+            slideTimer = setTimeout(() => {
+                nextSlide();
+            }, duration);
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+                prevSlide();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullScreen();
+            }
+        });
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => console.log(err));
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        scheduleNextSlide();
     </script>
 
 </body>
