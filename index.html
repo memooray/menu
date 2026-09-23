@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+=<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -85,7 +85,25 @@
             visibility: visible;
         }
 
-        /* شاشة الصورة الإعلانية (إظهار الصورة بالكامل بدون اقتطاع) */
+        /* شاشة عرض الفيديو الإعلاني */
+        .slide.video-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide.video-slide video {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain; /* إظهار كامل أبعاد الفيديو بدون قص */
+        }
+
+        /* شاشة الصورة الإعلانية */
         .slide.promo-image-slide {
             display: flex;
             justify-content: center;
@@ -100,7 +118,7 @@
             max-height: 100%;
             width: auto;
             height: auto;
-            object-fit: contain; /* يضمن ظهور كامل تفاصيل الصورة على أي شاشة دون قص */
+            object-fit: contain;
         }
 
         /* طبقة شفافة غامقة فوق الصورة الخلفية لبروز النص */
@@ -114,7 +132,7 @@
             z-index: 1;
         }
 
-        /* شبكة عرض الأقسام (4 أقسام بالشاشة) */
+        /* شبكة عرض الأقسام */
         .menu-layout {
             position: relative;
             z-index: 2;
@@ -551,15 +569,27 @@
         </div>
 
         <!-- ============================================== -->
-        <!-- الشاشة السادسة: الصورة الإعلانية (كاملة بدون قص) -->
+        <!-- الشاشة السادسة: الفيديو الإعلاني (قبل الصورة) -->
+        <!-- ============================================== -->
+        <div class="slide video-slide">
+            <!-- استبدل video.mp4 باسم ملف الفيديو الموجود لديك -->
+            <video id="promoVideo" muted playsinline preload="auto">
+                <source src="fc27.mp4" type="video/mp4">
+                متصفحك لا يدعم عرض الفيديو.
+            </video>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- الشاشة السابعة: الصورة الإعلانية (كاملة بدون قص) -->
         <!-- ============================================== -->
         <div class="slide promo-image-slide">
-            <img src="IMG_1921.PNG" alt="إعلان المقهى" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1920&auto=format&fit=crop';">
+            <img src="IMG_1925.PNG" alt="إعلان المقهى" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1920&auto=format&fit=crop';">
         </div>
 
         <!-- نقاط التحكم -->
         <div class="slide-controls">
             <div class="dot active"></div>
+            <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
@@ -572,13 +602,22 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
+        const promoVideo = document.getElementById('promoVideo');
         let slideTimer = null;
 
+        // عند انتهاء الفيديو تلقائياً، يتم الانتقال للشاشة التالية مباشرة
+        if (promoVideo) {
+            promoVideo.addEventListener('ended', () => {
+                nextSlide();
+            });
+        }
+
         function getSlideDuration(index) {
+            // شاشة الصورة الأخيرة (الآن أصبحت الشاشة رقم 6 بعد إضافة الفيديو)
             if (index === slides.length - 1) {
-                return 3 * 60 * 1000; // الشاشة الإعلانية الأخيرة: 3 دقائق
+                return 3 * 60 * 1000; // 3 دقائق للشخص المقابل ليرى الصورة
             }
-            return 12000; // شاشات المنيو: 12 ثانية
+            return 12000; // 12 ثانية لباقي شاشات القائمة
         }
 
         function showSlide(index) {
@@ -590,6 +629,15 @@
             currentSlide = index;
             slides[currentSlide].classList.add('active');
             if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+
+            // التحكم في تشغيل الفيديو عند الوصول لشاشته
+            const currentSlideElem = slides[currentSlide];
+            if (currentSlideElem.classList.contains('video-slide') && promoVideo) {
+                promoVideo.currentTime = 0;
+                promoVideo.play().catch(err => console.log('تعذر تشغيل الفيديو تلقائياً:', err));
+            } else if (promoVideo) {
+                promoVideo.pause();
+            }
         }
 
         function nextSlide() {
@@ -610,8 +658,13 @@
 
         function scheduleNextSlide() {
             clearTimeout(slideTimer);
-            const duration = getSlideDuration(currentSlide);
 
+            // إذا كانت الشاشة الحالية هي شاشة الفيديو، لا نضع مؤقتاً ثابتاً (الفيديو سيتكفل بالانتقال فور انتهائه)
+            if (slides[currentSlide].classList.contains('video-slide')) {
+                return;
+            }
+
+            const duration = getSlideDuration(currentSlide);
             slideTimer = setTimeout(() => {
                 nextSlide();
             }, duration);
